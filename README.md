@@ -1,0 +1,2 @@
+# lvgl9_for_cpkexp_ekra8x1
+基于cpkexp_ekra8x1开发板适配lvgl9
