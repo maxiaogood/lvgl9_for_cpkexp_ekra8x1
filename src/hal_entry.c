@@ -4,6 +4,7 @@
 
 //#include "lvgl/lvgl/lvgl.h"
 #include "demos/lv_demos.h"
+#include <stdio.h>
 
 FSP_CPP_HEADER
 void R_BSP_WarmStart(bsp_warm_start_event_t event);
@@ -40,6 +41,15 @@ void hal_entry(void)
 //        lv_demo_widgets();
     #endif
         lv_demo_widgets();
+    fsp_err_t err;
+
+    err = R_SCI_B_UART_Open(&g_uart3_ctrl, &g_uart3_cfg);
+    if (FSP_SUCCESS != err)
+    {
+        while(1);
+    }
+
+    printf("Hello world!\r\n");
     while (1)
     {
         lv_timer_handler();
