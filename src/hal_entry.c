@@ -38,17 +38,8 @@ void hal_entry(void)
     #endif
 
     #if (1 == LV_USE_DEMO_WIDGETS && 0 == LV_USE_DEMO_BENCHMARK)
-//        lv_demo_widgets();
-    #endif
         lv_demo_widgets();
-    fsp_err_t err;
-
-    err = R_SCI_B_UART_Open(&g_uart3_ctrl, &g_uart3_cfg);
-    if (FSP_SUCCESS != err)
-    {
-        while(1);
-    }
-
+    #endif
     printf("Hello world!\r\n");
     while (1)
     {

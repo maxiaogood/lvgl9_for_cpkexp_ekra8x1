@@ -17,7 +17,7 @@ void board_init(void)
 {
     /* Need to initialise the Touch Controller before the LCD, as only a Single Reset line shared between them */
     //touch_init();
-
+    HalUart3Init();
 #if DIRECT_MODE
     fsp_err_t err;
     err = RM_LVGL_PORT_Open(&g_lvgl_port_ctrl, &g_lvgl_port_cfg);

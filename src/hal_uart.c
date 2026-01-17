@@ -1,17 +1,22 @@
-/*
-* Copyright (c) 2020 - 2024 Renesas Electronics Corporation and/or its affiliates
-*
-* SPDX-License-Identifier: BSD-3-Clause
-*/
-
+/**
+ * @file hal_uart.c
+ * @author maxiao (maxiao@dreame.tech)
+ * @brief 串口HAL层实现文件, 重定向printf和scanf到串口3
+ * @version 0.1
+ * @date 2026-01-17
+ *
+ * @copyright Copyright (c) 2026, Dreame Technology Co.Ltd. All rights reserved.
+ *
+ */
+#include "board_init.h"
 #include "hal_data.h"
 #include <stdio.h>
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
 
-int user_read(char *buffer, int file, int count);
-int user_write(char ptr, FILE* file);
+int UserRead(char *buffer, int file, int count);
+int UserWrite(char ptr, FILE *file);
 
 /* Forward declarations for POSIX functions */
 int _write(int file, char *ptr, int len);
@@ -24,95 +29,130 @@ off_t _lseek(int file, off_t ptr, int dir);
 volatile bool g_data_received_flag = false;
 volatile bool g_data_transmit_flag = false;
 
+/**
+ * @brief 串口3初始化
+ *
+ */
+void HalUart3Init(void)
+{
+    fsp_err_t err = FSP_ERR_ASSERTION;
+
+    err = R_SCI_B_UART_Open(&g_uart3_ctrl, &g_uart3_cfg);
+    if (FSP_SUCCESS != err)
+    {
+        while (1)
+            ;
+    }
+}
+
+/**
+ * @brief 串口回调函数,用于设置接收和发送完成标志,函数名需与hal_data.h中声明的保持一致
+ * 
+ * @param p_args 
+ */
 void user_uart3_callback(uart_callback_args_t *p_args)
 {
     switch (p_args->event)
     {
-        case UART_EVENT_TX_COMPLETE:
-            g_data_transmit_flag = true;
+    case UART_EVENT_TX_COMPLETE:
+        g_data_transmit_flag = true;
         break;
 
-        case UART_EVENT_RX_COMPLETE:
-            g_data_received_flag = true;
+    case UART_EVENT_RX_COMPLETE:
+        g_data_received_flag = true;
         break;
 
-        default:
+    default:
         break;
     }
 }
 
-int user_read(char *buffer, int file, int count)
+/**
+ * @brief 串口读取函数
+ * 
+ * @param buffer 
+ * @param file 
+ * @param count 
+ * @return int 
+ */
+int UserRead(char *buffer, int file, int count)
 {
     FSP_PARAMETER_NOT_USED(file);
 
-    int bytesReceived = 0;
-
+    int bytes_received = 0;
 
     for (int i = 0; i < count; i++)
     {
         // Start Transmission
         g_data_received_flag = false;
-        fsp_err_t err = R_SCI_B_UART_Read(&g_uart3_ctrl, (uint8_t * const)(buffer + i), 1U);
+        fsp_err_t err = R_SCI_B_UART_Read(&g_uart3_ctrl, (uint8_t *const)(buffer + i), 1U);
         if (FSP_SUCCESS != err)
         {
-             return -1;
+            return -1;
         }
         /* Wait for event receive complete */
         while (!g_data_received_flag)
         {
         }
 
-        bytesReceived++;
+        bytes_received++;
 
-        if ((char)(buffer[i]) == '\r') //Break out of the loop if ENTER is pressed
+        if ((char)(buffer[i]) == '\r') // Break out of the loop if ENTER is pressed
         {
             break;
         }
     }
     __NOP();
-    return bytesReceived;
+    return bytes_received;
 }
 
-int user_write(char ptr, FILE* file)
+/**
+ * @brief 串口写入函数
+ * 
+ * @param ptr 
+ * @param file 
+ * @return int 
+ */
+int UserWrite(char ptr, FILE *file)
 {
-  FSP_PARAMETER_NOT_USED(file);
+    FSP_PARAMETER_NOT_USED(file);
 
-  // Start Transmission
-  g_data_transmit_flag = false;
-  if(ptr != 0)
-  {
-      fsp_err_t err = R_SCI_B_UART_Write(&g_uart3_ctrl, (uint8_t * const)(&ptr), 1U);
-      if (FSP_SUCCESS != err)
-      {
-           return -1;
-      }
-  }
-  else
-      return 0;
+    // Start Transmission
+    g_data_transmit_flag = false;
+    if (ptr != 0)
+    {
+        fsp_err_t err = R_SCI_B_UART_Write(&g_uart3_ctrl, (uint8_t *const)(&ptr), 1U);
+        if (FSP_SUCCESS != err)
+        {
+            return -1;
+        }
+    }
+    else
+        return 0;
 
-  // Wait for event receive complete
-  while (!g_data_transmit_flag)
-  {
-  }
+    // Wait for event receive complete
+    while (!g_data_transmit_flag)
+    {
+    }
 
-  return FSP_SUCCESS;
+    return FSP_SUCCESS;
 }
 
 /* Redirect stdout/stderr to UART for printf support */
 int _write(int file, char *ptr, int len)
 {
     FSP_PARAMETER_NOT_USED(file);
-    
+
     if (ptr == NULL || len <= 0)
     {
         return 0;
     }
-    
+
     for (int i = 0; i < len; i++)
     {
-        user_write(ptr[i], NULL);
+        UserWrite(ptr[i], NULL);
     }
-    
+
     return len;
 }
 
@@ -120,13 +160,13 @@ int _write(int file, char *ptr, int len)
 int _read(int file, char *ptr, int len)
 {
     FSP_PARAMETER_NOT_USED(file);
-    
+
     if (ptr == NULL || len <= 0)
     {
         return 0;
     }
-    
-    return user_read(ptr, file, len);
+
+    return UserRead(ptr, file, len);
 }
 
 int _close(int file)
@@ -138,7 +178,7 @@ int _close(int file)
 int _fstat(int file, struct stat *st)
 {
     FSP_PARAMETER_NOT_USED(file);
-    
+
     if (st != NULL)
     {
         st->st_mode = S_IFCHR;
@@ -150,7 +190,7 @@ int _fstat(int file, struct stat *st)
 int _isatty(int file)
 {
     FSP_PARAMETER_NOT_USED(file);
-    return 1;  /* Character device (TTY) */
+    return 1; /* Character device (TTY) */
 }
 
 off_t _lseek(int file, off_t ptr, int dir)
@@ -158,5 +198,5 @@ off_t _lseek(int file, off_t ptr, int dir)
     FSP_PARAMETER_NOT_USED(file);
     FSP_PARAMETER_NOT_USED(ptr);
     FSP_PARAMETER_NOT_USED(dir);
-    return 0;  /* Cannot seek on character device */
+    return 0; /* Cannot seek on character device */
 }
