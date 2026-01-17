@@ -1,0 +1,23 @@
+#pragma once
+
+#include "r_mipi_dsi.h"
+
+
+typedef struct {
+    unsigned char size;
+    unsigned char buffer[15];
+    mipi_dsi_cmd_id_t  msg_id;
+    mipi_dsi_cmd_flag_t flags;
+} LCD_setting_table;
+
+
+extern const mipi_dsi_cfg_t g_mipi_dsi1_cfg;
+extern mipi_dsi_instance_ctrl_t  g_mipi_dsi0_ctrl;
+extern LCD_setting_table lcd_init_focuslcd[];
+
+fsp_err_t dsi_layer_configure_peripheral(void);
+
+
+#define MIPI_DSI_DISPLAY_CONFIG_DATA_DELAY_FLAG      ((mipi_dsi_cmd_id_t) 0xFE)
+#define MIPI_DSI_DISPLAY_CONFIG_DATA_END_OF_TABLE    ((mipi_dsi_cmd_id_t) 0xFD)
+
