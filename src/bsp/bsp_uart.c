@@ -1,11 +1,11 @@
 /**
- * @file hal_uart.c
- * @author maxiao (maxiao@dreame.tech)
- * @brief 串口HAL层实现文件, 重定向printf和scanf到串口3
+ * @file bsp_uart.c
+ * @author maxiao (maxiaogood@qq.com)
+ * @brief 串口驱动实现文件, 重定向printf和scanf到串口3
  * @version 0.1
- * @date 2026-01-17
+ * @date 2026-01-18
  *
- * @copyright Copyright (c) 2026, Dreame Technology Co.Ltd. All rights reserved.
+ * @copyright Copyright (c) 2026, maxiao. All rights reserved.
  *
  */
 #include "board_init.h"
@@ -14,9 +14,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-
-int UserRead(char *buffer, int file, int count);
-int UserWrite(char ptr, FILE *file);
 
 /* Forward declarations for POSIX functions */
 int _write(int file, char *ptr, int len);
@@ -33,7 +30,7 @@ volatile bool g_data_transmit_flag = false;
  * @brief 串口3初始化
  *
  */
-void HalUart3Init(void)
+void BspUart3Init(void)
 {
     fsp_err_t err = FSP_ERR_ASSERTION;
 
@@ -47,8 +44,8 @@ void HalUart3Init(void)
 
 /**
  * @brief 串口回调函数,用于设置接收和发送完成标志,函数名需与hal_data.h中声明的保持一致
- * 
- * @param p_args 
+ *
+ * @param p_args
  */
 void user_uart3_callback(uart_callback_args_t *p_args)
 {
@@ -69,13 +66,13 @@ void user_uart3_callback(uart_callback_args_t *p_args)
 
 /**
  * @brief 串口读取函数
- * 
- * @param buffer 
- * @param file 
- * @param count 
- * @return int 
+ *
+ * @param buffer
+ * @param file
+ * @param count
+ * @return int
  */
-int UserRead(char *buffer, int file, int count)
+int BspUserRead(char *buffer, int file, int count)
 {
     FSP_PARAMETER_NOT_USED(file);
 
@@ -108,12 +105,12 @@ int UserRead(char *buffer, int file, int count)
 
 /**
  * @brief 串口写入函数
- * 
- * @param ptr 
- * @param file 
- * @return int 
+ *
+ * @param ptr
+ * @param file
+ * @return int
  */
-int UserWrite(char ptr, FILE *file)
+int BspUserWrite(char ptr, FILE *file)
 {
     FSP_PARAMETER_NOT_USED(file);
 
@@ -150,7 +147,7 @@ int _write(int file, char *ptr, int len)
 
     for (int i = 0; i < len; i++)
     {
-        UserWrite(ptr[i], NULL);
+        BspUserWrite(ptr[i], NULL);
     }
 
     return len;
@@ -166,7 +163,7 @@ int _read(int file, char *ptr, int len)
         return 0;
     }
 
-    return UserRead(ptr, file, len);
+    return BspUserRead(ptr, file, len);
 }
 
 int _close(int file)

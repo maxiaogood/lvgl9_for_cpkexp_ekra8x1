@@ -1,0 +1,9 @@
+{
+    // Doxygen documentation generator set start
+    "doxdocgen.generic.authorEmail": "maxiaogood@qq.com",
+    "doxdocgen.generic.authorName": "maxiao",
+    "doxdocgen.file.copyrightTag": [
+        "@copyright Copyright (c) {year}, maxiao. All rights reserved."
+    ],
+    // Doxygen documentation generator set end
+}

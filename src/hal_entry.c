@@ -40,7 +40,8 @@ void hal_entry(void)
     #if (1 == LV_USE_DEMO_WIDGETS && 0 == LV_USE_DEMO_BENCHMARK)
         lv_demo_widgets();
     #endif
-    printf("Hello world!\r\n");
+    printf("LV_HOR_RES = %ld\r\n", LV_HOR_RES);
+    printf("LV_VER_RES = %ld\r\n", LV_VER_RES);
     while (1)
     {
         lv_timer_handler();
