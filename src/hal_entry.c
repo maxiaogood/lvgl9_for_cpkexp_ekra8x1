@@ -5,6 +5,7 @@
 //#include "lvgl/lvgl/lvgl.h"
 #include "demos/lv_demos.h"
 #include <stdio.h>
+#include "beken_ui.h"
 
 FSP_CPP_HEADER
 void R_BSP_WarmStart(bsp_warm_start_event_t event);
@@ -38,8 +39,9 @@ void hal_entry(void)
     #endif
 
     #if (1 == LV_USE_DEMO_WIDGETS && 0 == LV_USE_DEMO_BENCHMARK)
-        lv_demo_widgets();
+        //lv_demo_widgets();
     #endif
+    beken_ui_init();
     printf("LV_HOR_RES = %ld\r\n", LV_HOR_RES);
     printf("LV_VER_RES = %ld\r\n", LV_VER_RES);
     uint32_t led_open_time = 0;

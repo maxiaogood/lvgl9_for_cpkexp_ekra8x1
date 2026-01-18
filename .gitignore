@@ -3,3 +3,5 @@ ra/*
 ra_cfg/*
 ra_gen/*
 JLinkLog.log
+src/build/*
+src/lv_port_pc_simulate/*
