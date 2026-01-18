@@ -49,6 +49,6 @@ int beken_get_screen_height(void)
 void beken_ui_init(void)
 {
     
-    init_page_page_1(&bk_lv_tool_ui);
-    lv_screen_load(bk_lv_tool_ui.page_1);
+    init_page_page_main(&bk_lv_tool_ui);
+    lv_screen_load(bk_lv_tool_ui.page_main);
 }

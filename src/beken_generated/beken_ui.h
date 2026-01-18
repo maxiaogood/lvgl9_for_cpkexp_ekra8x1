@@ -37,17 +37,19 @@ extern "C" {
 typedef struct
 {
     /* Page: 0 objects */
-    lv_obj_t *page_1;
-    lv_obj_t *page_1_label_1;
+    lv_obj_t *page_main;
+    lv_obj_t *page_main_animimg_1;
 } bk_lv_ui_t;
 
-void init_page_page_1(bk_lv_ui_t *bk_ui);
-void destroy_page_page_1(bk_lv_ui_t *bk_ui);
+void init_page_page_main(bk_lv_ui_t *bk_ui);
+void destroy_page_page_main(bk_lv_ui_t *bk_ui);
 
 /* declare image */
+LV_IMAGE_DECLARE(boot0_222x480_RGB565A8_NONE);
+LV_IMAGE_DECLARE(boot2_222x480_RGB565A8_NONE);
+LV_IMAGE_DECLARE(boot3_222x480_RGB565A8_NONE);
 
 /* declare fonts */
-LV_FONT_DECLARE(lv_font_montserrat_regular_16);
 
 /**
  * @brief Initialize the Beken UI system

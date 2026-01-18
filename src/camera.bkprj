@@ -1,8 +1,8 @@
 {
-  "id": "id_1768733461458_16c8a83bf",
+  "id": "proj_1768739562774_bbf8352e",
   "name": "camera",
   "description": "相机",
-  "path": "C:\\Users\\mx\\Desktop\\code\\cpk\\camera",
+  "path": "C:\\Users\\mx\\Desktop\\code\\cpk\\lvgl9_for_cpkexp_ekra8x1\\src",
   "lvglVersion": "9.3",
   "resolution": {
     "width": 222,
@@ -14,7 +14,7 @@
     "description": "",
     "version": "1.0.0",
     "createdAt": "2026-01-18T10:52:21.722Z",
-    "updatedAt": "2026-01-18T10:53:05.772Z",
+    "updatedAt": "2026-01-18T13:03:52.671Z",
     "settings": {
       "theme": "default",
       "screenWidth": 222,
@@ -29,18 +29,18 @@
       {
         "wid": "page_1",
         "type": "page",
-        "name": "page_1",
+        "name": "page_main",
         "description": "page_1",
         "components": [
           {
-            "wid": "page_1_label_1",
-            "type": "label",
-            "name": "label_1",
-            "description": "LVGL Label component for displaying text",
+            "wid": "page_1_animimg_1",
+            "type": "animimg",
+            "name": "animimg_1",
+            "description": "LVGL AnimImg component for displaying animated images",
             "category": {
-              "id": "display",
-              "name": "数据展示",
-              "description": "Data display components"
+              "id": "media",
+              "name": "图片媒体",
+              "description": "Image and media components"
             },
             "properties": [
               {
@@ -55,7 +55,7 @@
                 "pid": "y",
                 "name": "y",
                 "type": "Common/Number",
-                "value": 1,
+                "value": 0,
                 "isVisible": true,
                 "category": "layout"
               },
@@ -63,7 +63,7 @@
                 "pid": "width",
                 "name": "width",
                 "type": "Common/Number",
-                "value": 60,
+                "value": 222,
                 "isVisible": true,
                 "category": "layout"
               },
@@ -71,7 +71,7 @@
                 "pid": "height",
                 "name": "height",
                 "type": "Common/Number",
-                "value": 20,
+                "value": 480,
                 "isVisible": true,
                 "category": "layout"
               },
@@ -116,26 +116,66 @@
                 "category": "layout"
               },
               {
-                "pid": "text",
-                "name": "text",
-                "type": "Common/String",
-                "value": "test",
+                "pid": "duration",
+                "name": "duration",
+                "type": "Common/Number",
+                "value": 500,
                 "isVisible": true,
                 "category": "general"
               },
               {
-                "pid": "is_text_static",
-                "name": "is_text_static",
+                "pid": "reverse",
+                "name": "reverse",
                 "type": "Common/Boolean",
                 "value": false,
                 "isVisible": true,
                 "category": "general"
               },
               {
-                "pid": "long_mode",
-                "name": "long_mode",
+                "pid": "reverse_delay",
+                "name": "reverse_delay",
+                "type": "Common/Number",
+                "value": 200,
+                "isVisible": false,
+                "category": "general"
+              },
+              {
+                "pid": "reverse_duration",
+                "name": "reverse_duration",
+                "type": "Common/Number",
+                "value": 500,
+                "isVisible": false,
+                "category": "general"
+              },
+              {
+                "pid": "repeat_count",
+                "name": "repeat_count",
+                "type": "Common/Number",
+                "value": 0,
+                "isVisible": true,
+                "category": "general"
+              },
+              {
+                "pid": "autostart",
+                "name": "autostart",
+                "type": "Common/Boolean",
+                "value": true,
+                "isVisible": true,
+                "category": "general"
+              },
+              {
+                "pid": "color_format",
+                "name": "color_format",
                 "type": "Common/Enum",
-                "value": "WRAP",
+                "value": "RGB565A8",
+                "isVisible": true,
+                "category": "general"
+              },
+              {
+                "pid": "dither_algorithm",
+                "name": "dither_algorithm",
+                "type": "Common/Enum",
+                "value": "NONE",
                 "isVisible": true,
                 "category": "general"
               },
@@ -146,6 +186,7 @@
                 "value": [
                   "SCROLL_CHAIN_HOR",
                   "SCROLL_ELASTIC",
+                  "ADV_HITTEST",
                   "SCROLL_CHAIN",
                   "SNAPPABLE",
                   "CLICK_FOCUSABLE",
@@ -269,54 +310,6 @@
                           "category": "background"
                         },
                         {
-                          "pid": "font_family",
-                          "name": "font_family",
-                          "type": "LVGL/Font",
-                          "value": "montserrat",
-                          "isVisible": true,
-                          "category": "font"
-                        },
-                        {
-                          "pid": "font_size",
-                          "name": "font_size",
-                          "type": "Common/Number",
-                          "value": 16,
-                          "isVisible": true,
-                          "category": "font"
-                        },
-                        {
-                          "pid": "text_color",
-                          "name": "text_color",
-                          "type": "LVGL/Color",
-                          "value": "#000000ff",
-                          "isVisible": true,
-                          "category": "font"
-                        },
-                        {
-                          "pid": "text_opa",
-                          "name": "text_opa",
-                          "type": "Common/Number",
-                          "value": 255,
-                          "isVisible": false,
-                          "category": "font"
-                        },
-                        {
-                          "pid": "text_align",
-                          "name": "text_align",
-                          "type": "Common/Enum",
-                          "value": "LEFT",
-                          "isVisible": true,
-                          "category": "font"
-                        },
-                        {
-                          "pid": "text_letter_space",
-                          "name": "text_letter_space",
-                          "type": "Common/Number",
-                          "value": 0,
-                          "isVisible": true,
-                          "category": "space"
-                        },
-                        {
                           "pid": "border_width",
                           "name": "border_width",
                           "type": "Common/Number",
@@ -365,54 +358,6 @@
                           ],
                           "isVisible": true,
                           "category": "border"
-                        },
-                        {
-                          "pid": "pad_left",
-                          "name": "pad_left",
-                          "type": "Common/Number",
-                          "value": 0,
-                          "isVisible": true,
-                          "category": "padding"
-                        },
-                        {
-                          "pid": "pad_bottom",
-                          "name": "pad_bottom",
-                          "type": "Common/Number",
-                          "value": 0,
-                          "isVisible": true,
-                          "category": "padding"
-                        },
-                        {
-                          "pid": "pad_top",
-                          "name": "pad_top",
-                          "type": "Common/Number",
-                          "value": 0,
-                          "isVisible": true,
-                          "category": "padding"
-                        },
-                        {
-                          "pid": "pad_right",
-                          "name": "pad_right",
-                          "type": "Common/Number",
-                          "value": 0,
-                          "isVisible": true,
-                          "category": "padding"
-                        },
-                        {
-                          "pid": "pad_row",
-                          "name": "pad_row",
-                          "type": "Common/Number",
-                          "value": 0,
-                          "isVisible": true,
-                          "category": "padding"
-                        },
-                        {
-                          "pid": "pad_column",
-                          "name": "pad_column",
-                          "type": "Common/Number",
-                          "value": 0,
-                          "isVisible": true,
-                          "category": "padding"
                         },
                         {
                           "pid": "shadow_color",
@@ -465,14 +410,36 @@
                       ],
                       "enabledGroups": {
                         "background": true,
-                        "font": true,
-                        "space": true,
                         "border": true,
-                        "padding": true,
                         "shadow": true
                       }
                     }
                   ]
+                }
+              ]
+            },
+            "extraData": {
+              "images": [
+                {
+                  "name": "boot0.png",
+                  "path": "C:\\Users\\mx\\Desktop\\code\\cpk\\lvgl9_for_cpkexp_ekra8x1\\src\\assets\\boot0.png",
+                  "width": 222,
+                  "height": 480,
+                  "mtime": 1768741266648.661
+                },
+                {
+                  "name": "boot3.png",
+                  "path": "C:\\Users\\mx\\Desktop\\code\\cpk\\lvgl9_for_cpkexp_ekra8x1\\src\\assets\\boot3.png",
+                  "width": 222,
+                  "height": 480,
+                  "mtime": 1768741266656.398
+                },
+                {
+                  "name": "boot2.png",
+                  "path": "C:\\Users\\mx\\Desktop\\code\\cpk\\lvgl9_for_cpkexp_ekra8x1\\src\\assets\\boot2.png",
+                  "width": 222,
+                  "height": 480,
+                  "mtime": 1768741266655.0063
                 }
               ]
             },
@@ -597,14 +564,14 @@
         },
         "events": [],
         "createdAt": "2026-01-18T10:52:21.723Z",
-        "updatedAt": "2026-01-18T10:53:05.772Z",
+        "updatedAt": "2026-01-18T12:48:06.073Z",
         "isStartPage": true
       }
     ],
     "componentLibraries": []
   },
   "version": "1.1.6",
-  "updatedAt": "2026-01-18T10:53:06.278Z",
+  "updatedAt": "2026-01-18T13:03:53.188Z",
   "config": {
     "i18n": {
       "enableI18n": false

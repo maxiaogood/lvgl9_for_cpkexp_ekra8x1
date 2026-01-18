@@ -39,7 +39,7 @@ void hal_entry(void)
     #endif
 
     #if (1 == LV_USE_DEMO_WIDGETS && 0 == LV_USE_DEMO_BENCHMARK)
-        //lv_demo_widgets();
+        lv_demo_widgets();
     #endif
     beken_ui_init();
     printf("LV_HOR_RES = %ld\r\n", LV_HOR_RES);
