@@ -210,9 +210,9 @@ FSP Configuration
       P003 P11 ADC1_AN104 - - - "Analog mode" - - "ACMPHS1: IVREF_1; ADC1: AN104" - I - - 
       P004 P10 ADC0_AN000 - - - "Analog mode" - - "ACMPHS0: IVCMP0_2; ADC0: AN000; IRQ9: IRQ9-DS" - I - - 
       P005 N10 ADC0_AN001 - - - "Analog mode" - - "ADC0: AN001; IRQ10: IRQ10-DS" - I - - 
-      P006 R11 - - - - Disabled - - "ACMPHS0: IVCMP0_3; ADC0: AN002; IRQ11: IRQ11-DS" - None - - 
+      P006 R11 GPIO - - None "Input mode" - - "ACMPHS0: IVCMP0_3; ADC0: AN002; IRQ11: IRQ11-DS" - IO - - 
       P007 M10 ADC0_AN004 - - - "Analog mode" - - "ADC0: AN004" - I - - 
-      P008 R10 - USER_SW - - Disabled - - "ADC0: AN008; IRQ12: IRQ12-DS" - None - - 
+      P008 R10 GPIO USER_SW - None "Input mode" - - "ADC0: AN008; IRQ12: IRQ12-DS" - IO - - 
       P009 L9 - - - - Disabled - - "ADC0: AN006; IRQ13: IRQ13-DS" - None - - 
       P010 M8 - - - - Disabled - - "ACMPHS0: IVCMP0_0; ADC0: AN005; IRQ14: IRQ14" - None - - 
       P011 M9 ADC1_AN106 - - - "Analog mode" - - "ADC1: AN106" - I - - 
@@ -230,7 +230,7 @@ FSP Configuration
       P113 C3 SDRAM_CKE - H - "Peripheral mode" - - "BUS: CS1#; ETHER_MII: ET0_EXOUT; ETHER_RMII: ET0_EXOUT; GLCD: LCD_DATA9; GPT2: GTIOC2A; SCI0: RXD0; SDRAM: CKE; SPI0: SSLA1; SSIE: SSIFS0; SSIE: SSILRCK0; ULPT0: ULPTOA0_A-DS" - O - - 
       P114 C2 SDRAM_WE - H - "Peripheral mode" - - "BUS: CS0#; ETHER_MII: ET0_LINKSTA; ETHER_RMII: ET0_LINKSTA; GLCD: LCD_DATA8; GPT2: GTIOC2B; SCI0: CTS_RTS0; SCI0: DE0; SDRAM: WE; SPI0: SSLA0; SSIE0: SSIRXD0" - O - - 
       P115 D3 SDRAM_SDCS - H - "Peripheral mode" - - "ETHER_MII: ET0_WOL; ETHER_RMII: ET0_WOL; GLCD: LCD_DATA7; GPT5: GTIOC5A; SCI0: CTS0; SDRAM: SDCS; SPI0: MOSI0; SSIE0: SSITXD0" - O - - 
-      P200 B8 - - - - Disabled - - "IRQ: NMI" - None - - 
+      P200 B8 GPIO - - None "Input mode" - - "IRQ: NMI" - IO - - 
       P201 E9 - - - - Disabled - - "SYSTEM: MD" - None - - 
       P206 D11 MIPI_DSI_TE - L None "Peripheral mode" - - "BUS: CS7#; GPT_OPS: GTIU; IIC1: SDA1; IRQ0: IRQ0-DS; MIPI: DSI_TE; SCI4: RXD4; SDHI0: SD0DAT2; SPI0: SSLA2; SSIE1: SSIDATA1; USB FS: USB_VBUSEN" - IO - - 
       P207 C13 - - - - Disabled - - "GLCD: LCD_DATA9" - None - - 

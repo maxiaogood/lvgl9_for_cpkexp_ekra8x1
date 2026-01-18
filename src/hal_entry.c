@@ -54,6 +54,18 @@ void hal_entry(void)
             BSP_USER_LED3_TOGGLE();
             led_open_time = 0;
         }
+        if (BspKeyGetState(BSP_USER_KEY1_PIN) == BSP_IO_LEVEL_LOW)
+        {
+            printf("KEY1 Pressed!\r\n");
+        }
+        if (BspKeyGetState(BSP_USER_KEY2_PIN) == BSP_IO_LEVEL_LOW)
+        {
+            printf("KEY2 Pressed!\r\n");
+        }
+        if (BspKeyGetState(BSP_USER_KEY3_PIN) == BSP_IO_LEVEL_LOW)
+        {
+            printf("KEY3 Pressed!\r\n");
+        }
     }
 #if BSP_TZ_SECURE_BUILD
     /* Enter non-secure code */

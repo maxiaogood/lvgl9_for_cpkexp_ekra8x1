@@ -795,8 +795,12 @@
       <configSetting altId="p004.gpio_mode.gpio_mode_an" configurationId="p004.gpio_mode"/>
       <configSetting altId="p005.adc0.an001" configurationId="p005"/>
       <configSetting altId="p005.gpio_mode.gpio_mode_an" configurationId="p005.gpio_mode"/>
+      <configSetting altId="p006.input" configurationId="p006"/>
+      <configSetting altId="p006.gpio_mode.gpio_mode_in" configurationId="p006.gpio_mode"/>
       <configSetting altId="p007.adc0.an004" configurationId="p007"/>
       <configSetting altId="p007.gpio_mode.gpio_mode_an" configurationId="p007.gpio_mode"/>
+      <configSetting altId="p008.input" configurationId="p008"/>
+      <configSetting altId="p008.gpio_mode.gpio_mode_in" configurationId="p008.gpio_mode"/>
       <configSetting altId="p011.adc1.an106" configurationId="p011"/>
       <configSetting altId="p011.gpio_mode.gpio_mode_an" configurationId="p011.gpio_mode"/>
       <configSetting altId="p014.adc0.an007" configurationId="p014"/>
@@ -830,6 +834,8 @@
       <configSetting altId="p115.sdram.sdcs" configurationId="p115"/>
       <configSetting altId="p115.gpio_speed.gpio_speed_h" configurationId="p115.gpio_drivecapacity"/>
       <configSetting altId="p115.gpio_mode.gpio_mode_peripheral" configurationId="p115.gpio_mode"/>
+      <configSetting altId="p200.input" configurationId="p200"/>
+      <configSetting altId="p200.gpio_mode.gpio_mode_in" configurationId="p200.gpio_mode"/>
       <configSetting altId="p206.mipi.dsi_te" configurationId="p206"/>
       <configSetting altId="p206.gpio_mode.gpio_mode_peripheral" configurationId="p206.gpio_mode"/>
       <configSetting altId="p208.jtag_fslash_swd.tdi" configurationId="p208"/>
