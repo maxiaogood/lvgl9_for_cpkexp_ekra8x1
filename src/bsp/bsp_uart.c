@@ -65,24 +65,62 @@ void user_uart3_callback(uart_callback_args_t *p_args)
 }
 
 /**
- * @brief 串口读取函数
+ * @brief 写入数据到串口 (POSIX _write)
  *
- * @param buffer
  * @param file
- * @param count
+ * @param ptr
+ * @param len
  * @return int
  */
-int BspUserRead(char *buffer, int file, int count)
+int _write(int file, char *ptr, int len)
 {
     FSP_PARAMETER_NOT_USED(file);
 
+    if (ptr == NULL || len <= 0)
+    {
+        return 0;
+    }
+
+    // Start Transmission - write all bytes at once
+    g_data_transmit_flag = false;
+    fsp_err_t err = R_SCI_B_UART_Write(&g_uart3_ctrl, (uint8_t *const)(ptr), (uint32_t)len);
+    if (FSP_SUCCESS != err)
+    {
+        return -1;
+    }
+
+    // Wait for event transmit complete
+    while (!g_data_transmit_flag)
+    {
+    }
+
+    return len;
+}
+
+/**
+ * @brief 从串口读取数据 (POSIX _read)
+ *
+ * @param file
+ * @param ptr
+ * @param len
+ * @return int
+ */
+int _read(int file, char *ptr, int len)
+{
+    FSP_PARAMETER_NOT_USED(file);
+
+    if (ptr == NULL || len <= 0)
+    {
+        return 0;
+    }
+
     int bytes_received = 0;
 
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < len; i++)
     {
-        // Start Transmission
+        // Start Reception
         g_data_received_flag = false;
-        fsp_err_t err = R_SCI_B_UART_Read(&g_uart3_ctrl, (uint8_t *const)(buffer + i), 1U);
+        fsp_err_t err = R_SCI_B_UART_Read(&g_uart3_ctrl, (uint8_t *const)(ptr + i), 1U);
         if (FSP_SUCCESS != err)
         {
             return -1;
@@ -94,76 +132,13 @@ int BspUserRead(char *buffer, int file, int count)
 
         bytes_received++;
 
-        if ((char)(buffer[i]) == '\r') // Break out of the loop if ENTER is pressed
+        if ((char)(ptr[i]) == '\r') // Break out of the loop if ENTER is pressed
         {
             break;
         }
     }
     __NOP();
     return bytes_received;
-}
-
-/**
- * @brief 串口写入函数
- *
- * @param ptr
- * @param file
- * @return int
- */
-int BspUserWrite(char ptr, FILE *file)
-{
-    FSP_PARAMETER_NOT_USED(file);
-
-    // Start Transmission
-    g_data_transmit_flag = false;
-    if (ptr != 0)
-    {
-        fsp_err_t err = R_SCI_B_UART_Write(&g_uart3_ctrl, (uint8_t *const)(&ptr), 1U);
-        if (FSP_SUCCESS != err)
-        {
-            return -1;
-        }
-    }
-    else
-        return 0;
-
-    // Wait for event receive complete
-    while (!g_data_transmit_flag)
-    {
-    }
-
-    return FSP_SUCCESS;
-}
-
-/* Redirect stdout/stderr to UART for printf support */
-int _write(int file, char *ptr, int len)
-{
-    FSP_PARAMETER_NOT_USED(file);
-
-    if (ptr == NULL || len <= 0)
-    {
-        return 0;
-    }
-
-    for (int i = 0; i < len; i++)
-    {
-        BspUserWrite(ptr[i], NULL);
-    }
-
-    return len;
-}
-
-/* Minimal POSIX file operations for embedded systems */
-int _read(int file, char *ptr, int len)
-{
-    FSP_PARAMETER_NOT_USED(file);
-
-    if (ptr == NULL || len <= 0)
-    {
-        return 0;
-    }
-
-    return BspUserRead(ptr, file, len);
 }
 
 int _close(int file)
