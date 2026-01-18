@@ -1,14 +1,17 @@
-/*
- * bsp_key.h
- *
- *  Created on: 2026年1月18日
- *      Author: mx
+/**
+ * @file bsp_key.h
+ * @author maxiao (maxiaogood@qq.com)
+ * @brief 按键驱动头文件
+ * @version 0.1
+ * @date 2026-01-18
+ * 
+ * @copyright Copyright (c) 2026, maxiao. All rights reserved.
+ * 
  */
-
 #ifndef __BSP_BSP_KEY_H__
 #define __BSP_BSP_KEY_H__
 
-#include "common_data.h"
+#include "hal_data.h"
 
 // 用户按键P008,核心板上的SW202
 #define BSP_USER_KEY1_PIN BSP_IO_PORT_00_PIN_08
@@ -16,7 +19,7 @@
 // 用户按键P006,扩展板上的S1
 #define BSP_USER_KEY2_PIN BSP_IO_PORT_00_PIN_06
 
-// 用户按键P005,扩展板上的NMI
+// 用户按键P200,扩展板上的NMI
 #define BSP_USER_KEY3_PIN BSP_IO_PORT_02_PIN_00
 
 /**
