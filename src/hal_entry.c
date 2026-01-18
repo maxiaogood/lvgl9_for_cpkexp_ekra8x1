@@ -42,10 +42,18 @@ void hal_entry(void)
     #endif
     printf("LV_HOR_RES = %ld\r\n", LV_HOR_RES);
     printf("LV_VER_RES = %ld\r\n", LV_VER_RES);
+    uint32_t led_open_time = 0;
     while (1)
     {
         lv_timer_handler();
         R_BSP_SoftwareDelay(3, BSP_DELAY_UNITS_MILLISECONDS);
+        if (led_open_time++ >= 300)
+        {
+            BSP_USER_LED1_TOGGLE();
+            BSP_USER_LED2_TOGGLE();
+            BSP_USER_LED3_TOGGLE();
+            led_open_time = 0;
+        }
     }
 #if BSP_TZ_SECURE_BUILD
     /* Enter non-secure code */
